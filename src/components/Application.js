@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "components/Application.scss";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";import "components/Appointment";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
+import "components/Appointment";
 import DayList from "./DayList";
 import Appointment from "components/Appointment";
 
+      
 export default function Application(props) {
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
   });
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
   const setDay = day => setState({ ...state, day });
+
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
 
 
   useEffect(() => {
-    const apiDays = axios.get(`/api/days`);
+    const apiDays = axios.get(`/api/days`);  
     const apiAppointments = axios.get(`/api/appointments`);
     const apiInterviewers = axios.get(`/api/interviewers`)
     Promise.all([
@@ -35,7 +38,6 @@ export default function Application(props) {
         }))
       });
   }, []);
-
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     return (
@@ -44,14 +46,13 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={interviewers}
       />
     );
   });
-
-
   return (
     <main className="layout">
-      <section className="sidebar">  
+      <section className="sidebar">
         <img
           className="sidebar--centered"
           src="images/logo.png"
@@ -62,10 +63,9 @@ export default function Application(props) {
           <DayList
             days={state.days}
             day={state.day}
-            // value={state.day}
             setDay={setDay}
           />
-        </nav>  
+        </nav>
         <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
@@ -73,12 +73,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-      {schedule}
-        {dailyAppointments.map(appointment => (
-          <Appointment
-            key={appointment.id}
-            {...appointment} />
-        ))}
+        {schedule}
       </section>
     </main>
   );
