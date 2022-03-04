@@ -3,6 +3,7 @@ This is a React application that allows users to book and cancel interviews. We 
 
 ## Screenshots
 !["screenshot of main page"] (https://github.com/AbdulmajeedS/Scheduler/blob/master/public/images/main.png)
+!["screenshot of adding appointment"] (https://github.com/AbdulmajeedS/Scheduler/blob/master/public/images/addApointment.png)
 
 ## Setup
 
