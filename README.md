@@ -2,7 +2,8 @@
 This is a React application that allows users to book and cancel interviews. We combine a concise API with a WebSocket server to build a realtime experience.
 
 ## Screenshots
-!["screenshot of main page"] (https://github.com/AbdulmajeedS/Scheduler/public/images/main.png)
+!["screenshot of main page"] (https://github.com/AbdulmajeedS/Scheduler/blob/master/public/images/main.png)
+
 !["screenshot of adding appointment"] (https://github.com/AbdulmajeedS/Scheduler/public/images/addApointment.png)
 
 ## Setup
